@@ -1,0 +1,63 @@
+# ============================================================
+# 文章转视频 - 项目配置文件
+# ============================================================
+
+# 服务端口
+services:
+  project_service:
+    host: "0.0.0.0"
+    port: 5005
+  compositor_service:
+    host: "0.0.0.0"
+    port: 5003
+
+# 数据库
+database:
+  type: sqlite
+  sqlite_path: "./data/app.db"
+  # 如需 PostgreSQL，取消注释以下配置
+  # postgresql:
+  #   host: localhost
+  #   port: 5432
+  #   dbname: article2video
+  #   user: postgres
+  #   password: ""
+
+# Redis
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: ""
+  enabled: true  # 设为 false 可不依赖 Redis 运行
+
+# 文件存储
+storage:
+  type: local
+  local_path: "./storage"
+
+# Dify 连接
+dify:
+  api_base: "http://localhost/v1"
+  api_key: ""
+
+# 视频合成默认参数
+compositor:
+  default_resolution:
+    horizontal: "1920x1080"
+    vertical: "1080x1920"
+  default_fps: 30
+  default_transition: "fade"
+  default_transition_duration: 0.5
+  subtitle:
+    font: "Noto Sans CJK SC"
+    font_size: 24
+    color: "&HFFFFFF&"
+    outline_color: "&H000000&"
+    position: "bottom_center"
+  ken_burns_enabled: true
+
+# 日志
+logging:
+  level: INFO
+  file: "./logs/app.log"

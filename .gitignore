@@ -1,0 +1,10 @@
+**/__pycache__
+.venv
+
+data
+torage
+logs
+dify
+storage
+sum.md
+.DS_Store
