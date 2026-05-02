@@ -1,4 +1,5 @@
 import json
+import re
 from fastapi import APIRouter, HTTPException, Query
 from services.project_service.models import (
     SegmentCreate, SegmentUpdate, SegmentContentEdit,
@@ -7,6 +8,61 @@ from services.project_service.models import (
 from services.project_service import db
 
 router = APIRouter(prefix="/api", tags=["segments"])
+
+
+def split_text_to_segments(source_text: str, split_mode: str = "auto") -> list:
+    """将文本拆分为段落列表"""
+    if split_mode == "manual":
+        # 手动模式：用 ===SPLIT=== 标记拆分
+        parts = re.split(r'===SPLIT===', source_text)
+    else:
+        # 自动模式：按段落拆分
+        # 先按换行分段，再每3-5段合并为一个segment
+        lines = source_text.split('\n')
+        paragraphs = []
+        current = []
+
+        for line in lines:
+            line = line.strip()
+            if not line:
+                if current:
+                    paragraphs.append('\n'.join(current))
+                    current = []
+            else:
+                current.append(line)
+
+        if current:
+            paragraphs.append('\n'.join(current))
+
+        # 每3段合并为一个segment
+        segment_size = 3
+        parts = []
+        for i in range(0, len(paragraphs), segment_size):
+            parts.append('\n\n'.join(paragraphs[i:i + segment_size]))
+
+    segments = []
+    for idx, part in enumerate(parts):
+        part = part.strip()
+        if not part:
+            continue
+
+        # 提取标题（第一行或前50字）
+        lines = part.split('\n')
+        title = lines[0].strip() if lines else f"段落 {idx + 1}"
+        if len(title) > 50:
+            title = title[:50] + "..."
+
+        # 生成摘要
+        summary = part[:100] + "..." if len(part) > 100 else part
+
+        segments.append({
+            "segment_index": idx + 1,
+            "title": title,
+            "content": part,
+            "summary": summary,
+        })
+
+    return segments
 
 
 # ── 保存段落及其分镜 ──

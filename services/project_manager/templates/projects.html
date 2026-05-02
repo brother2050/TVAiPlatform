@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}项目列表{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>项目列表</h2>
+    {% if projects %}
+    <table>
+        <thead>
+            <tr>
+                <th>项目名称</th>
+                <th>拆分模式</th>
+                <th>段落数</th>
+                <th>进度</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in projects %}
+            <tr>
+                <td><a href="/ui/projects/{{ p.id }}">{{ p.name }}</a></td>
+                <td>{{ p.split_mode }}</td>
+                <td>{{ p.segment_count }}</td>
+                <td>
+                    <div class="progress-bar">
+                        <div class="fill" style="width: {{ p.progress }}%"></div>
+                    </div>
+                    <small>{{ p.completed_count }}/{{ p.segment_count }}</small>
+                </td>
+                <td>{{ p.created_at[:16] }}</td>
+                <td>
+                    <a href="/ui/projects/{{ p.id }}" class="btn btn-sm btn-primary">查看</a>
+                    <form method="post" action="/ui/projects/{{ p.id }}/delete" style="display:inline"
+                          onsubmit="return confirm('确定删除？')">
+                        <button type="submit" class="btn btn-sm btn-danger">删除</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color:#666">暂无项目。<a href="/ui/projects/new">创建第一个项目</a></p>
+    {% endif %}
+</div>
+{% endblock %}
