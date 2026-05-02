@@ -9,19 +9,12 @@ services:
     port: 5005
   compositor_service:
     host: "0.0.0.0"
-    port: 5003
+    port: 5004
 
 # 数据库
 database:
   type: sqlite
   sqlite_path: "./data/app.db"
-  # 如需 PostgreSQL，取消注释以下配置
-  # postgresql:
-  #   host: localhost
-  #   port: 5432
-  #   dbname: article2video
-  #   user: postgres
-  #   password: ""
 
 # Redis
 redis:

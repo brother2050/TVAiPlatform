@@ -42,9 +42,9 @@ else
 fi
 
 # ── 启动视频合成服务 ──
-echo "[2/2] 启动视频合成服务 (端口 5003)..."
-if lsof -i :5003 &>/dev/null; then
-    echo -e "  ${YELLOW}端口 5003 已被占用，跳过${NC}"
+echo "[2/2] 启动视频合成服务 (端口 5004)..."
+if lsof -i :5004 &>/dev/null; then
+    echo -e "  ${YELLOW}端口 5004 已被占用，跳过${NC}"
 else
     nohup python3 -m services.compositor.app \
         > logs/compositor_service.log 2>&1 &
@@ -69,8 +69,8 @@ else
     echo -e "  ${YELLOW}! 项目管理服务启动中...请稍后检查${NC}"
 fi
 
-if curl -s http://localhost:5003/health | grep -q "healthy"; then
-    echo -e "  ${GREEN}✓ 视频合成服务 (5003)${NC}"
+if curl -s http://localhost:5004/health | grep -q "healthy"; then
+    echo -e "  ${GREEN}✓ 视频合成服务 (5004)${NC}"
 else
     echo -e "  ${YELLOW}! 视频合成服务启动中...请稍后检查${NC}"
 fi
@@ -81,7 +81,7 @@ echo -e "  ${GREEN}服务启动完成${NC}"
 echo ""
 echo "  API 文档："
 echo "    项目管理: http://localhost:5005/docs"
-echo "    视频合成: http://localhost:5003/docs"
+echo "    视频合成: http://localhost:5004/docs"
 echo ""
 echo "  停止服务：scripts/stop-all.sh"
 echo "  查看日志：tail -f logs/*.log"
