@@ -36,7 +36,7 @@ Dify 平台（编排中枢）
 # 3. 启动服务
 ./scripts/start-all.sh
 
-# 4. 在 Dify 中配置工作流和工具（参考 dify-config/）
+# (废弃)4. 在 Dify 中配置工作流和工具（参考 dify-config/）
 
 # 5. 开始使用
 ```

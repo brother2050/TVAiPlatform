@@ -65,7 +65,7 @@ stop_service() {
 }
 
 stop_service "项目管理服务" "logs/project_service.pid" "5005"
-stop_service "视频合成服务" "logs/compositor_service.pid" "5003"
+stop_service "视频合成服务" "logs/compositor_service.pid" "5004"
 
 echo ""
 echo -e "${GREEN}所有服务已停止${NC}"
