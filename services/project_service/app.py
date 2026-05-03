@@ -139,7 +139,7 @@ async def ui_project_detail(request: Request, project_id: str):
     if not project:
         return HTMLResponse("项目不存在", status_code=404)
 
-    segs = get_segments_by_segment(project_id)
+    segs = get_segments_by_project(project_id)
     segments_list = []
     for seg in segs:
         shots_data = get_shots_by_segment(seg["id"])
