@@ -63,7 +63,7 @@ stop_service() {
         fi
     fi
 }
-
+stop_service "ChatTTS服务" "logs/chat_tts_service.pid" "5006"
 stop_service "项目管理服务" "logs/project_service.pid" "5005"
 stop_service "视频合成服务" "logs/compositor_service.pid" "5004"
 

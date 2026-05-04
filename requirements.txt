@@ -7,3 +7,8 @@ python-multipart==0.0.12
 aiofiles==24.1.0
 Pillow==10.4.0
 jinja2==3.1.4
+# ChatTTS 依赖
+ChatTTS>=0.2.0
+numpy>=1.24.0
+transformers>=4.41.1,<5.0.0
+requests>=2.32.5

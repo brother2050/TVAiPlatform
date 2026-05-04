@@ -31,6 +31,7 @@ storage:
 
 # Dify 连接
 dify:
+  # api_base: "https://6c16236a4dd749cab973acf14c2a1889--5005.ap-shanghai2.cloudstudio.club/v1"
   api_base: "http://localhost/v1"
   api_key: ""
 
@@ -49,6 +50,14 @@ compositor:
     outline_color: "&H000000&"
     position: "bottom_center"
   ken_burns_enabled: true
+
+# ChatTTS 服务
+chattts:
+  host: "0.0.0.0"
+  port: 5006
+  device: "auto"  # auto, cuda, cpu
+  storage_path: "./storage/chattts"
+  default_voice_id: "default_female"
 
 # 日志
 logging:
