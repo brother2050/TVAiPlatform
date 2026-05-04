@@ -18,6 +18,7 @@ from shared.storage import get_storage
 from shared.redis_client import get_redis
 
 from services.project_service.routers import projects, segments, shots, batch
+from services.project_service.routers.comfyui import router as comfyui_router
 
 # 配置 Jinja2 模板
 templates = Jinja2Templates(directory=os.path.join(os.path.dirname(__file__), "templates"))
@@ -58,6 +59,7 @@ app.include_router(projects.router)
 app.include_router(segments.router)
 app.include_router(shots.router)
 app.include_router(batch.router)
+app.include_router(comfyui_router)
 
 
 @app.get("/health")
